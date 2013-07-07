@@ -127,4 +127,11 @@ class CollectionTest extends \Codeception\TestCase\Test
 	{
 		$this->assertTrue($this->collection->unique( SORT_REGULAR ) instanceof Collection, 'Mapped function calls yield instances of Collection');
 	}
+
+	public function testCloningCreatesDeepCopy()
+	{
+		$clone = clone $this->collection;
+
+		$this->assertFalse( $clone['c'] === $this->collection['c'], 'Nested objects should be of different instance' );
+	}
 }

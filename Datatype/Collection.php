@@ -231,6 +231,16 @@ class Collection extends Object implements \ArrayAccess, \SeekableIterator, \Cou
 		}
 	}
 
+	/**
+	 * Implement deep copying of the Collection
+	 *
+	 * @return		void
+	 */
+	public function __clone()
+	{
+		$this->__construct( $this->to_a() );
+	}
+
 	// Countable interface implementation
 
 	/**

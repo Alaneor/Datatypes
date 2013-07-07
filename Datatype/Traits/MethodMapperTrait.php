@@ -14,8 +14,6 @@ trait MethodMapperTrait
 		$prefix = static::_function_prefix();
 		$function = $prefix . $method;
 
-		//! is_array( $args ) && $args = [$args];
-
 		if ( function_exists( $function ) )
 		{
 			$data = $this->_get_object_data();

@@ -50,12 +50,23 @@ class Collection extends Object implements \ArrayAccess, \SeekableIterator, \Cou
 	];
 
 
+	/**
+	 * Required by MethodMapperTrait
+	 *
+	 * @return		string		The function prefix to be appended to function call
+	 * @internal
+	 */
 	private static function _function_prefix()
 	{
 		return "array_";
 	}
 
 
+	/**
+	 * Create a new instance of the class
+	 *
+	 * @param		array		The data this instance should hold
+	 */
 	public function __construct( $array = [] )
 	{
 		// Ensure we are dealing with arrays all the time
@@ -69,7 +80,7 @@ class Collection extends Object implements \ArrayAccess, \SeekableIterator, \Cou
 	}
 
 	/**
-	 * Return an array representation of the Collection object
+	 * Return an array representation of the Collection instance
 	 *
 	 * @return		array		The array representation of the Collection
 	 */
@@ -85,21 +96,48 @@ class Collection extends Object implements \ArrayAccess, \SeekableIterator, \Cou
 		return $data;
 	}
 
+	/**
+	 * Does a specific key exist in the Collection?
+	 *
+	 * @param		mixed		The key to be searched for
+	 *
+	 * @return		bool		True of a key exists in the Collection, false otherwise
+	 */
 	public function exists( $key )
 	{
 		return isset( $this->data[$key] );
 	}
 
+	/**
+	 * Returns all keys in the Collection
+	 *
+	 * @return		Collection		A Collection holding all the keys
+	 */
 	public function keys()
 	{
 		return new Collection( array_keys( $this->data ) );
 	}
 
+	/**
+	 * Returns the data at a given key
+	 *
+	 * @param		mixed		The key to for which data should be returned
+	 *
+	 * @return		mixed		The data, if it exists, or null otherwise
+	 */
 	public function get( $key )
 	{
 		return isset( $this->data[$key] ) ? $this->data[$key] : null;
 	}
 
+	/**
+	 * Sets the value for a given key
+	 *
+	 * @param		string|int		The key to hold the data
+	 * @param		mixed			The data to be held by the key
+	 *
+	 * @return		self
+	 */
 	public function set( $key, $value )
 	{
 		if ( is_array( $value ) ) $value = new Collection( $value );
@@ -113,29 +151,66 @@ class Collection extends Object implements \ArrayAccess, \SeekableIterator, \Cou
 		return $this;
 	}
 
+	/**
+	 * Adds data to the end of the Collection
+	 *
+	 * You should use the standard array notation '[]' to add
+	 * items to the Collection for better performace.
+	 *
+	 * @param		mixed		The data to be added to the Collection
+	 */
 	public function add( $value )
 	{
-
 		return $this->set( null, $value );
 	}
 
-	public function remove( $index )
+	/**
+	 * Removes a given key from the Collection
+	 *
+	 * @param		string|int		The key to be removed from the Collection
+	 *
+	 * @return		self
+	 */
+	public function remove( $key )
 	{
-		unset( $this->data[$index] );
+		unset( $this->data[$key] );
 
 		return $this;
 	}
 
+	/**
+	 * Get the first item in the Collection
+	 *
+	 * @return		mixed		The first item in the Collection
+	 */
 	public function first()
 	{
 		return reset( $this->data );
 	}
 
+	/**
+	 * Get the last item in the Collection
+	 *
+	 * @return		mixed		The last item in the Collection
+	 */
 	public function last()
 	{
 		return end( $this->data );
 	}
 
+	/**
+	 * Intercept the MethodMapperTrait behaviour and convert
+	 * its return value to class-specific, if possible
+	 *
+	 * If the function call returned null, $this will be returned
+	 * If the function call returned array, {@link Collection} will be returned
+	 * For any other return value, the value will be returned untouched
+	 *
+	 * @param		string		The method that was called
+	 * @param		array		The arguments passed to the method call
+	 *
+	 * @return		self|mixed	If applicable, convert the result to instance of Collection; otherwise pass the result unmodified
+	 */
 	public function __call( $method, $args )
 	{
 		$result = $this->___call( $method, $args );
@@ -158,6 +233,13 @@ class Collection extends Object implements \ArrayAccess, \SeekableIterator, \Cou
 
 	// Countable interface implementation
 
+	/**
+	 * Returns the number of items in the Collection
+	 *
+	 * @internal
+	 *
+	 * @return		int		The number of items in the Collection
+	 */
 	public final function count()
 	{
 		return count( $this->data );
@@ -263,6 +345,11 @@ class Collection extends Object implements \ArrayAccess, \SeekableIterator, \Cou
 		return isset( $this->iterator_keys[$this->iterator_position] );
 	}
 
+	/**
+	 * Method required by the MethodMapperTrait
+	 *
+	 * @return		array		An array representation of the Collection
+	 */
 	protected function _get_object_data()
 	{
 		return $this->to_a();

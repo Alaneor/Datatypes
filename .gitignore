@@ -12,8 +12,6 @@ Icon
 .Trashes
 
 vendor
-tests/_log
-tests/_data
 tests/acceptance/WebGuy.php
 tests/functional/TestGuy.php
 tests/unit/CodeGuy.php

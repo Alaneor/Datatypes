@@ -14,7 +14,7 @@ trait PropertyMapper
 	 * @param		string		The property being accessed
 	 * @return		mixed		Return whatever the called method ( if any ) returns
 	 */
-	public final function __get( $property )
+	public function __get( $property )
 	{
 		$method = '';
 

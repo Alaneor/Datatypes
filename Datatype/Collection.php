@@ -2,14 +2,14 @@
 
 namespace Datatype;
 
-use Datatype\Traits\PropertyMapper;
+use Datatype\Traits\PropertyMapperTrait;
 
 /**
  * Collection datatype
  */
 class Collection extends Object implements \ArrayAccess, \SeekableIterator, \Countable
 {
-	use PropertyMapper;
+	use PropertyMapperTrait;
 
 	/**
 	 * The collection's data is stored here

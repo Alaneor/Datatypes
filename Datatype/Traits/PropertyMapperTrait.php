@@ -2,7 +2,7 @@
 
 namespace Datatype\Traits;
 
-trait PropertyMapper
+trait PropertyMapperTrait
 {
 	/**
 	 * Map a property accessor to a method call

@@ -1,0 +1,24 @@
+{
+    "name": "alaneor/datatypes",
+    "description": "Object-oriented implementation of the basic datatypes found in PHP - String, Collection, Number, and new base type Object",
+    "keywords": ["array", "string", "number", "object", "datatype", "base type"],
+    "homepage": "https://github.com/Alaneor/Datatypes",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Robert Rossmann",
+            "email": "rr.rossmann@me.com",
+            "homepage": "https://github.com/Alaneor"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+        "php": ">=5.4.0"
+    },
+    "require-dev": {
+        "codeception/codeception": "@stable"
+    },
+    "autoload": {
+        "psr-0": {"Datatype\\": "."}
+    }
+}

@@ -127,7 +127,7 @@ class Collection extends Object implements \ArrayAccess, \SeekableIterator, \Cou
 
 	// Countable interface implementation
 
-	public function count()
+	public final function count()
 	{
 		return count( $this->data );
 	}
@@ -139,7 +139,7 @@ class Collection extends Object implements \ArrayAccess, \SeekableIterator, \Cou
 	 * @internal
 	 * @codeCoverageIgnore
 	 */
-	public function offsetSet( $offset, $value )
+	public final function offsetSet( $offset, $value )
 	{
 		return $this->set( $offset, $value );
 	}
@@ -148,7 +148,7 @@ class Collection extends Object implements \ArrayAccess, \SeekableIterator, \Cou
 	 * @internal
 	 * @codeCoverageIgnore
 	 */
-	public function offsetExists( $key )
+	public final function offsetExists( $key )
 	{
 		return $this->exists( $key );
 	}
@@ -157,7 +157,7 @@ class Collection extends Object implements \ArrayAccess, \SeekableIterator, \Cou
 	 * @internal
 	 * @codeCoverageIgnore
 	 */
-	public function offsetUnset( $offset )
+	public final function offsetUnset( $offset )
 	{
 		return $this->remove( $offset );
 	}
@@ -166,7 +166,7 @@ class Collection extends Object implements \ArrayAccess, \SeekableIterator, \Cou
 	 * @internal
 	 * @codeCoverageIgnore
 	 */
-	public function offsetGet( $offset )
+	public final function offsetGet( $offset )
 	{
 		return $this->get( $offset );
 	}
@@ -178,7 +178,7 @@ class Collection extends Object implements \ArrayAccess, \SeekableIterator, \Cou
 	 * @internal
 	 * @codeCoverageIgnore
 	 */
-	public function seek( $position )
+	public final function seek( $position )
 	{
 		if ( ! isset( $this->iterator_keys[$position] ) ) throw new Exception( "Invalid seek position: $position" );
 
@@ -189,7 +189,7 @@ class Collection extends Object implements \ArrayAccess, \SeekableIterator, \Cou
 	 * @internal
 	 * @codeCoverageIgnore
 	 */
-	public function rewind()
+	public final function rewind()
 	{
 		$this->iterator_position = 0;
 		$this->iterator_keys = array_keys( $this->data );
@@ -199,7 +199,7 @@ class Collection extends Object implements \ArrayAccess, \SeekableIterator, \Cou
 	 * @internal
 	 * @codeCoverageIgnore
 	 */
-	public function current()
+	public final function current()
 	{
 		$key = $this->iterator_keys[$this->iterator_position];
 		return $this->data[$key];
@@ -209,7 +209,7 @@ class Collection extends Object implements \ArrayAccess, \SeekableIterator, \Cou
 	 * @internal
 	 * @codeCoverageIgnore
 	 */
-	public function key()
+	public final function key()
 	{
 		return $this->iterator_keys[$this->iterator_position];
 	}
@@ -218,7 +218,7 @@ class Collection extends Object implements \ArrayAccess, \SeekableIterator, \Cou
 	 * @internal
 	 * @codeCoverageIgnore
 	 */
-	public function next()
+	public final function next()
 	{
 		$this->iterator_position++;
 	}
@@ -227,7 +227,7 @@ class Collection extends Object implements \ArrayAccess, \SeekableIterator, \Cou
 	 * @internal
 	 * @codeCoverageIgnore
 	 */
-	public function valid()
+	public final function valid()
 	{
 		return isset( $this->iterator_keys[$this->iterator_position] );
 	}

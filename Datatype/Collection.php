@@ -9,7 +9,7 @@ use Datatype\Traits\MethodMapperTrait;
 /**
  * Collection datatype
  */
-class Collection extends Object implements \ArrayAccess, \SeekableIterator, \Countable
+class Collection extends Object implements \ArrayAccess, \SeekableIterator, \Countable, \Serializable
 {
 	use PropertyMapperTrait,
 	MethodMapperTrait
@@ -240,6 +240,40 @@ class Collection extends Object implements \ArrayAccess, \SeekableIterator, \Cou
 	{
 		$this->__construct( $this->to_a() );
 	}
+
+
+	// Serializable interface implementation
+
+	/**
+	 * Serialises the data the Collection holds
+	 *
+	 * This will only serialise the data the instance holds;
+	 * you will not get an instance of Collection after unserialising
+	 * data you obtained by this method. To achieve that, you should use
+	 * the standard `serialize( $object )` function.
+	 *
+	 * @return		string		The serialised representation of the data
+	 */
+	public final function serialize()
+	{
+		return serialize( $this->to_a() );
+	}
+
+	/**
+	 * Unserialises a serialised string and stores it in the current instance
+	 *
+	 * You may use this method on an existing instance to restore already serialised data.
+	 * Any data previously stored in the instance will be replaced by the unserialised data.
+	 *
+	 * @param		string		The serialised data
+	 *
+	 * @return		void
+	 */
+	public final function unserialize( $data )
+	{
+		$this->__construct( unserialize( $data ) );
+	}
+
 
 	// Countable interface implementation
 

@@ -134,4 +134,11 @@ class CollectionTest extends \Codeception\TestCase\Test
 
 		$this->assertFalse( $clone['c'] === $this->collection['c'], 'Nested objects should be of different instance' );
 	}
+
+	public function testSerialisingAndUnserialisingCollectionDoesNotCorruptData()
+	{
+		$ser = serialize( $this->collection );
+
+		$this->assertEquals( $this->collection, unserialize( $ser ) );
+	}
 }

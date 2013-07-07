@@ -112,4 +112,19 @@ class CollectionTest extends \Codeception\TestCase\Test
 			$this->assertFalse( $item == 'should not see this item', 'Items added during foreach loop should not show up in the same loop' );
 		}
 	}
+
+	public function testICanCallArbitraryArrayFunctionAsMethod()
+	{
+		$testArray = new Collection( ['a' => 'b', 'c' => ['d' => 'nested'], 0 => 'e'] );
+
+		$this->assertEquals( 'e', $this->collection->pop(), 'This function requires the array to be passed as reference' );
+		$this->assertEquals( $testArray->to_a(), $this->collection->to_a(), 'The original object must not be modified by previous assertion' );
+
+		$this->assertEquals( $testArray, $this->collection->unique( SORT_REGULAR ), 'This function requires the array to be passed as copy' );
+	}
+
+	public function testMappedFunctionCallsYieldInstancesOfCollection()
+	{
+		$this->assertTrue($this->collection->unique( SORT_REGULAR ) instanceof Collection, 'Mapped function calls yield instances of Collection');
+	}
 }

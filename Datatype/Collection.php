@@ -3,13 +3,19 @@
 namespace Datatype;
 
 use Datatype\Traits\PropertyMapperTrait;
+use Datatype\Traits\MethodMapperTrait;
+
 
 /**
  * Collection datatype
  */
 class Collection extends Object implements \ArrayAccess, \SeekableIterator, \Countable
 {
-	use PropertyMapperTrait;
+	use PropertyMapperTrait,
+	MethodMapperTrait
+	{
+		MethodMapperTrait::__call as ___call;
+	}
 
 	/**
 	 * The collection's data is stored here
@@ -42,6 +48,12 @@ class Collection extends Object implements \ArrayAccess, \SeekableIterator, \Cou
 		'size'			=> 'count',
 		'count'			=> 'count',
 	];
+
+
+	private static function _function_prefix()
+	{
+		return "array_";
+	}
 
 
 	public function __construct( $array = [] )
@@ -124,6 +136,25 @@ class Collection extends Object implements \ArrayAccess, \SeekableIterator, \Cou
 		return end( $this->data );
 	}
 
+	public function __call( $method, $args )
+	{
+		$result = $this->___call( $method, $args );
+
+		switch ( $result )
+		{
+			case is_null( $result ):
+
+				return $this;
+
+			case is_array( $result ):
+
+				return new static( $result );
+
+			default:
+
+				return $result;
+		}
+	}
 
 	// Countable interface implementation
 
@@ -230,5 +261,10 @@ class Collection extends Object implements \ArrayAccess, \SeekableIterator, \Cou
 	public final function valid()
 	{
 		return isset( $this->iterator_keys[$this->iterator_position] );
+	}
+
+	protected function _get_object_data()
+	{
+		return $this->to_a();
 	}
 }

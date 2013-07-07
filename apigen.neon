@@ -1,0 +1,17 @@
+# Configuration file for the ApiGen documentation builder
+
+source			: Datatype
+destination		: docs/www
+
+charset			: utf8
+title			: Datatypes
+allowedHtml		: [b,i,a,ul,ol,li,p,br,var,samp,kbd,tt,h2,h3,h4]
+baseUrl			:
+
+accessLevels	: [public]
+autocomplete	: [classes, methods, constants, classconstants, functions]
+php				: Yes
+todo			: yes # Consider turning this off when publishing the docs
+templateConfig	: docs/templates/bootstrap/config.neon
+
+quiet			: No

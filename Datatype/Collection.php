@@ -67,20 +67,36 @@ class Collection extends Object implements
 
 
 	/**
+	 * Convert non-array elements to arrays and arrays to Collections
+	 *
+	 * @param		mixed		Any input value
+	 * @return		array		An array. If this array originally contained nested arrays, they become instances of Collection
+	 */
+	private function to_c( $items )
+	{
+		$data = [];
+
+		// Ensure we are dealing with arrays all the time
+		$items = (array)$items;
+
+		foreach ( $items as $key => $value )
+		{
+			$data[$key] = is_array( $value ) ? new Collection( $value ) : $value;
+		}
+
+		return $data;
+	}
+
+
+	/**
 	 * Create a new instance of the class
 	 *
 	 * @param		array		The data this instance should hold
 	 */
 	public function __construct( $array = [] )
 	{
-		// Ensure we are dealing with arrays all the time
-		if ( ! is_array( $array ) ) $array = [$array];
-
 		// If the provided array contains nested arrays, they should become Collections, too
-		foreach ( $array as $key => $value )
-		{
-			$this->data[$key] = is_array( $value ) ? new Collection( $value ) : $value;
-		}
+		$this->data = $this->to_c( $array );
 	}
 
 	/**

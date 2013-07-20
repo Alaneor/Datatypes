@@ -219,6 +219,22 @@ class Collection extends Object implements
 	}
 
 	/**
+	 * Pop one element off the end of Collection and return it
+	 *
+	 * @see			<a href="http://www.php.net/manual/en/function.array-pop.php">PHP - array_pop()</a>
+	 *
+	 * @return		mixed		The last value of Collection. If Collection is empty NULL will be returned
+	 */
+	public function pop()
+	{
+		$value = $this->last();
+
+		end( $this->data );						// Move array pointer to last item
+		$this->remove( key( $this->data ) );	// Remove the item by the key at the end of $data
+
+		return $value;
+	}
+
 	/**
 	 * Push one or more elements onto the end of Collection
 	 *

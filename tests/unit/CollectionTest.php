@@ -85,6 +85,18 @@ class CollectionTest extends \Codeception\TestCase\Test
 		$this->assertFalse( array_key_exists( 'c', $this->collection->to_a() ) );
 	}
 
+	public function testICanPopItemsOutOfCollection()
+	{
+		$this->assertEquals( 'e', $this->collection->pop() );
+		$this->assertEquals( ['d' => 'nested'], $this->collection->pop()->to_a() );
+	}
+
+	public function testPoppingFromEmptyCollectionReturnsNull()
+	{
+		$col = new Collection;
+		$this->assertEquals( null, $col->pop() );
+	}
+
 	public function testAddingAnArrayToCollectionWillTurnItToCollection()
 	{
 		$nested_array = ['added' => 'later'];
@@ -123,10 +135,8 @@ class CollectionTest extends \Codeception\TestCase\Test
 	{
 		$testArray = new Collection( ['a' => 'b', 'c' => ['d' => 'nested'], 0 => 'e'] );
 
-		$this->assertEquals( 'e', $this->collection->pop(), 'This function requires the array to be passed as reference' );
-		$this->assertEquals( $testArray->to_a(), $this->collection->to_a(), 'The original object must not be modified by previous assertion' );
-
 		$this->assertEquals( $testArray, $this->collection->unique( SORT_REGULAR ), 'This function requires the array to be passed as copy' );
+		$this->assertEquals( $testArray->to_a(), $this->collection->to_a(), 'The original object must not be modified by previous assertion' );
 	}
 
 	public function testMappedFunctionCallsYieldInstancesOfCollection()

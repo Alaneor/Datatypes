@@ -172,7 +172,7 @@ class Collection extends Object implements
 	}
 
 	/**
-	 * Adds data to the end of the Collection
+	 * Add one element to the end of the Collection
 	 *
 	 * You should use the standard array notation '[]' to add
 	 * items to the Collection for better performace.

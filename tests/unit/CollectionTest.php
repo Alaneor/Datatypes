@@ -73,6 +73,12 @@ class CollectionTest extends \Codeception\TestCase\Test
 		$this->assertEquals( 'another item', end( $this->collection->to_a() ), "Could not add item via 'add()' method" );
 	}
 
+	public function testPushMoreItemsAtOnceToCollection()
+	{
+		$this->collection->push( 'pushed', 'pushed again' );
+		$this->assertEquals( 'pushed again', $this->collection->last() );
+	}
+
 	public function testICanRemoveItemsFromCollection()
 	{
 		$this->collection->remove( 'c' );

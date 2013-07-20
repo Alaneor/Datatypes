@@ -219,6 +219,26 @@ class Collection extends Object implements
 	}
 
 	/**
+	/**
+	 * Push one or more elements onto the end of Collection
+	 *
+	 * This function behaves identically to PHP's array_push() except that
+	 * it returns self instead of the new number of elements in the Collection.
+	 *
+	 * @see			<a href="http://www.php.net/manual/en/function.array-push.php">PHP - array_push()</a>
+	 *
+	 * @return		self
+	 */
+	public function push()
+	{
+		$args = func_get_args();
+
+		foreach( $args as $arg ) $this->add( $arg );
+
+		return $this;
+	}
+
+	/**
 	 * Intercept the MethodMapperTrait behaviour and convert
 	 * its return value to class-specific, if possible
 	 *

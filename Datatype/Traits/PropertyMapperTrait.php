@@ -19,12 +19,12 @@ trait PropertyMapperTrait
 		$method = '';
 
 		if (
-			isset( $this->property_map ) &&
-			isset( $this->property_map[$property] ) &&
-			is_callable( [$this, $this->property_map[$property]] )
+			isset( static::$property_map ) &&
+			isset( static::$property_map[$property] ) &&
+			is_callable( [$this, static::$property_map[$property]] )
 			)
 		{
-			$method = $this->property_map[$property];
+			$method = static::$property_map[$property];
 		}
 		elseif ( is_callable( [$this, $property] ) )
 		{

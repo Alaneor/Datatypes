@@ -43,7 +43,7 @@ class Collection extends Object implements \ArrayAccess, \SeekableIterator, \Cou
 	 *
 	 * @var		array
 	 */
-	private $property_map = [
+	private static $property_map = [
 		'length'		=> 'count',
 		'size'			=> 'count',
 		'count'			=> 'count',

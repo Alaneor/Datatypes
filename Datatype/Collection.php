@@ -51,6 +51,9 @@ class Collection extends Object implements
 		'length'		=> 'count',
 		'size'			=> 'count',
 		'count'			=> 'count',
+
+		'keys'			=> 'keys',
+		'values'		=> 'values',
 	];
 
 

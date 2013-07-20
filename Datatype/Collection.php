@@ -9,7 +9,11 @@ use Datatype\Traits\MethodMapperTrait;
 /**
  * Collection datatype
  */
-class Collection extends Object implements \ArrayAccess, \SeekableIterator, \Countable, \Serializable
+class Collection extends Object implements
+	\ArrayAccess,
+	\SeekableIterator,
+	\Countable,
+	\Serializable
 {
 	use PropertyMapperTrait,
 	MethodMapperTrait

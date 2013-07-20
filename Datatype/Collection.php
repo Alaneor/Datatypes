@@ -129,16 +129,6 @@ class Collection extends Object implements
 	}
 
 	/**
-	 * Returns all keys in the Collection
-	 *
-	 * @return		Collection		A Collection holding all the keys
-	 */
-	public function keys()
-	{
-		return new Collection( array_keys( $this->data ) );
-	}
-
-	/**
 	 * Returns the data at a given key
 	 *
 	 * @param		mixed		The key to for which data should be returned

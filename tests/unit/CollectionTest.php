@@ -32,6 +32,8 @@ class CollectionTest extends \Codeception\TestCase\Test
 	public function testCollectionHasDynamicallyCalculatedProperties()
 	{
 		$this->assertEquals( 3, $this->collection->length, 'The length property is not the same as the actual length' );
+		$this->assertEquals( ['a', 'c', 0], $this->collection->keys->to_a(), 'The keys property does not contain all keys' );
+		$this->assertEquals( ['b', ['d' => 'nested'], 'e'], $this->collection->values->to_a(), 'The values property does not contain all values' );
 	}
 
 	public function testCollectionHasSameStructureAsOriginalArray()

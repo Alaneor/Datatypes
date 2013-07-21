@@ -24,7 +24,7 @@ trait PropertyMapperTrait
 		if (
 			isset( static::$property_map ) &&
 			isset( static::$property_map[$property] ) &&
-			is_callable( [$this, static::$property_map[$property]] )
+			method_exists( $this, static::$property_map[$property] )
 			)
 		{
 			$method = static::$property_map[$property];

@@ -3,7 +3,7 @@
 namespace Datatype;
 
 use Datatype\Traits\PropertyMapperTrait;
-use Datatype\Traits\MethodMapperTrait;
+use Datatype\Traits\FunctionMapperTrait;
 
 
 /**
@@ -21,11 +21,12 @@ class Collection extends Object implements
 	\Countable,
 	\Serializable
 {
-	use PropertyMapperTrait,
-	MethodMapperTrait
-	{
-		MethodMapperTrait::__call as ___call;
-	}
+	use	PropertyMapperTrait,
+		FunctionMapperTrait
+		{
+			FunctionMapperTrait::___process_return_value as ___t_process_return_value;
+		}
+
 
 	/**
 	 * The collection's data is stored here
@@ -62,23 +63,26 @@ class Collection extends Object implements
 		'values'		=> 'values',
 	];
 
-
 	/**
-	 * Required by MethodMapperTrait
+	 * FunctionMapper mappings
 	 *
-	 * @return		string		The function prefix to be appended to function call
-	 * @internal
+	 * @var		array
 	 */
-	private static function _function_prefix()
-	{
-		return "array_";
-	}
+	private static $function_map = [
+	//	Called method:		Maps to:				$data position:			Args default values:
+		'unique'	=>		[ 'array_unique' ],
+		'keys'		=>		[ 'array_keys' ],
+		'values'	=>		[ 'array_values' ],
+		'map'		=>		[ 'array_map',			2 ],
+		'exists'	=>		[ 'array_key_exists',	2 ],
+	];
 
 
 	/**
 	 * Convert non-array elements to arrays and arrays to Collections
 	 *
 	 * @param		mixed		Any input value
+	 *
 	 * @return		array		An array. If this array originally contained nested arrays, they become instances of Collection
 	 */
 	private function to_c( $items )
@@ -94,6 +98,26 @@ class Collection extends Object implements
 		}
 
 		return $data;
+	}
+
+	/**
+	 * Get the Collection's keys
+	 *
+	 * @return		self		A Collection containing all the keys
+	 */
+	protected function keys()
+	{
+		return $this->___call_function_from_map( 'keys', $this->data );
+	}
+
+	/**
+	 * Get the Collection's values
+	 *
+	 * @return		self		A Collection containing all the values
+	 */
+	protected function values()
+	{
+		return $this->___call_function_from_map( 'values', $this->data );
 	}
 
 
@@ -125,17 +149,6 @@ class Collection extends Object implements
 		return $data;
 	}
 
-	/**
-	 * Does a specific key exist in the Collection?
-	 *
-	 * @param		mixed		The key to be searched for
-	 *
-	 * @return		bool		True of a key exists in the Collection, false otherwise
-	 */
-	public function exists( $key )
-	{
-		return isset( $this->data[$key] );
-	}
 
 	/**
 	 * Returns the data at a given key
@@ -253,37 +266,37 @@ class Collection extends Object implements
 		return $this;
 	}
 
-	/**
-	 * Intercept the MethodMapperTrait behaviour and convert
-	 * its return value to class-specific, if possible
-	 *
-	 * If the function call returned null, $this will be returned
-	 * If the function call returned array, {@link Collection} will be returned
-	 * For any other return value, the value will be returned untouched
-	 *
-	 * @param		string		The method that was called
-	 * @param		array		The arguments passed to the method call
-	 *
-	 * @return		self|mixed	If applicable, convert the result to instance of Collection; otherwise pass the result unmodified
-	 */
-	public function __call( $method, $args )
+
+	protected function ___process_return_value( $function, $value )
 	{
-		$result = $this->___call( $method, $args );
+		is_array( $value ) && $value = new self( $value );
 
-		switch ( $result )
+		return $this->___t_process_return_value( $function, $value );
+	}
+
+	public function __call( $function, $args )
+	{
+		// Use the FunctionMapperTrait to attempt to resolve
+		// the method call into a function call
+		try
 		{
-			case is_null( $result ):
-
-				return $this;
-
-			case is_array( $result ):
-
-				return new static( $result );
-
-			default:
-
-				return $result;
+			$result = $this->___call_function_from_map( $function, $this->data, $args );
 		}
+		catch ( \Exception $e )
+		{
+			// This means that the trait was unable to resolve the method call into a mapped function
+			if ( $e->getCode() === 1 )
+			{
+				$trace = debug_backtrace();
+				trigger_error(
+					'Call to undefined function ' . $function .
+					' in ' . $trace[0]['file'] .
+					' on line ' . $trace[0]['line'],
+					E_USER_ERROR );
+			}
+		}
+
+		return $result;
 	}
 
 	/**
@@ -442,15 +455,5 @@ class Collection extends Object implements
 	public final function valid()
 	{
 		return isset( $this->iterator_keys[$this->iterator_position] );
-	}
-
-	/**
-	 * Method required by the MethodMapperTrait
-	 *
-	 * @return		array		An array representation of the Collection
-	 */
-	protected function _get_object_data()
-	{
-		return $this->to_a();
 	}
 }

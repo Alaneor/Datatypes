@@ -43,11 +43,6 @@ class CollectionTest extends \Codeception\TestCase\Test
 		$this->assertSame( ['a' => 'b', 'c' => ['d' => 'nested'], 0 => 'e'], $this->collection->to_a() );
 	}
 
-	public function testKeysMethodReturnsAllKeys()
-	{
-		$this->assertEquals( ['a', 'c', 0], $this->collection->keys()->to_a() );
-	}
-
 	public function testLastMethodReturnsLastElement()
 	{
 		$this->assertEquals( 'e', $this->collection->last(), "The 'last()' method must return last element in Collection" );

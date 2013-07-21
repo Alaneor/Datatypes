@@ -2,6 +2,9 @@
 
 namespace Datatype\Traits;
 
+/**
+ * Map a magic property to a method call
+ */
 trait PropertyMapperTrait
 {
 	/**

@@ -30,7 +30,7 @@ trait PropertyMapperTrait
 		{
 			$method = self::$property_map[$property];
 		}
-		elseif ( in_array( 'Datatype\Traits\PropertyMapperTrait', class_uses( $parent ) ) )
+		elseif ( $parent && in_array( 'Datatype\Traits\PropertyMapperTrait', class_uses( $parent ) ) )
 		{
 			return parent::__get( $property );
 		}

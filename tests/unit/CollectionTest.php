@@ -26,7 +26,7 @@ class CollectionTest extends \Codeception\TestCase\Test
 
 		$this->assertContains( 'Countable', $implements, 'Collection must implement Countable interface' );
 		$this->assertContains( 'ArrayAccess', $implements, 'Collection must implement ArrayAccess interface' );
-		$this->assertContains( 'SeekableIterator', $implements, 'Collection must implement Iterator interface' );
+		$this->assertContains( 'SeekableIterator', $implements, 'Collection must implement SeekableIterator interface' );
 	}
 
 	public function testCollectionHasDynamicallyCalculatedProperties()

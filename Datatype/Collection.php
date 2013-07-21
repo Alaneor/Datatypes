@@ -309,7 +309,7 @@ class Collection extends Object implements
 	 *
 	 * @return		string		The serialised representation of the data
 	 */
-	public final function serialize()
+	public function serialize()
 	{
 		return serialize( $this->to_a() );
 	}
@@ -324,7 +324,7 @@ class Collection extends Object implements
 	 *
 	 * @return		void
 	 */
-	public final function unserialize( $data )
+	public function unserialize( $data )
 	{
 		$this->__construct( unserialize( $data ) );
 	}

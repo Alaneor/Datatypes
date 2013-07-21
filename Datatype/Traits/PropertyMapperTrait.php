@@ -29,14 +29,6 @@ trait PropertyMapperTrait
 		{
 			$method = static::$property_map[$property];
 		}
-		elseif ( is_callable( [$this, $property] ) )
-		{
-			$method = $property;
-		}
-		elseif ( is_callable( [$this, "___$property"] ) )
-		{
-			$method = "___$property";
-		}
 		else
 		{
 			$trace = debug_backtrace();

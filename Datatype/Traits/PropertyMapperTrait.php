@@ -20,14 +20,19 @@ trait PropertyMapperTrait
 	public function __get( $property )
 	{
 		$method = '';
+		$parent = current( class_parents( get_class() ) );
 
 		if (
-			isset( static::$property_map ) &&
-			isset( static::$property_map[$property] ) &&
-			method_exists( $this, static::$property_map[$property] )
+			isset( self::$property_map ) &&
+			isset( self::$property_map[$property] ) &&
+			method_exists( $this, self::$property_map[$property] )
 			)
 		{
-			$method = static::$property_map[$property];
+			$method = self::$property_map[$property];
+		}
+		elseif ( in_array( 'Datatype\Traits\PropertyMapperTrait', class_uses( $parent ) ) )
+		{
+			return parent::__get( $property );
 		}
 		else
 		{

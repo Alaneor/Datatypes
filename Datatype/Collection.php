@@ -9,11 +9,11 @@ use Datatype\Traits\FunctionMapperTrait;
 /**
  * Collection datatype
  *
- * @property-read		integer		count			Number of elements in Collection
- * @property-read		integer		length			Alias for count
- * @property-read		integer		size			Alias for count
- * @property-read		keys		Collection		All keys in the current Collection
- * @property-read		values		Collection		All values in the current Collection
+ * @property-read		integer			count		Number of elements in Collection
+ * @property-read		integer			length		Alias for count
+ * @property-read		integer			size		Alias for count
+ * @property-read		Collection		keys		All keys in the current Collection
+ * @property-read		Collection		values		All values in the current Collection
  */
 class Collection extends Object implements
 	\ArrayAccess,

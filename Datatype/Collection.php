@@ -97,12 +97,12 @@ class Collection extends Object implements
 		// Ensure we are dealing with arrays all the time
 		$items = (array)$items;
 
-		foreach ( $items as $key => $value )
+		foreach ( $items as $key => &$value )
 		{
-			$data[$key] = is_array( $value ) ? new Collection( $value ) : $value;
+			if ( is_array( $value ) ) $items[$key] = new Collection( $value );
 		}
 
-		return $data;
+		return $items;
 	}
 
 	/**

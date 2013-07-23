@@ -153,6 +153,8 @@ class Collection extends Object implements
 	 */
 	public function __construct( $array = [] )
 	{
+		parent::__construct();
+
 		// If the provided array contains nested arrays, they should become Collections, too
 		$this->data = $this->to_c( $array );
 	}

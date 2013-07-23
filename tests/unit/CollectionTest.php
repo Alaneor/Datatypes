@@ -43,14 +43,14 @@ class CollectionTest extends \Codeception\TestCase\Test
 		$this->assertSame( ['a' => 'b', 'c' => ['d' => 'nested'], 0 => 'e'], $this->collection->to_a() );
 	}
 
-	public function testLastMethodReturnsLastElement()
+	public function testLastPropertyReturnsLastElement()
 	{
-		$this->assertEquals( 'e', $this->collection->last(), "The 'last()' method must return last element in Collection" );
+		$this->assertEquals( 'e', $this->collection->last, "The 'last' property must return last element in Collection" );
 	}
 
-	public function testFirstMethodReturnsFirstElement()
+	public function testTheFirstPropertyReturnsFirstElement()
 	{
-		$this->assertEquals( 'b', $this->collection->first(), "The 'first()' method must return first element in Collection" );
+		$this->assertEquals( 'b', $this->collection->first, "The 'first' property must return first element in Collection" );
 	}
 
 	public function testICanCheckIfKeyExists()
@@ -74,7 +74,7 @@ class CollectionTest extends \Codeception\TestCase\Test
 	public function testPushMoreItemsAtOnceToCollection()
 	{
 		$this->collection->push( 'pushed', 'pushed again' );
-		$this->assertEquals( 'pushed again', $this->collection->last() );
+		$this->assertEquals( 'pushed again', $this->collection->last );
 	}
 
 	public function testICanRemoveItemsFromCollection()
@@ -101,7 +101,7 @@ class CollectionTest extends \Codeception\TestCase\Test
 
 		$this->collection[] = $nested_array;
 
-		$this->assertTrue( $this->collection->last() instanceof Collection, 'Arrays added later should be also converted to collections' );
+		$this->assertTrue( $this->collection->last instanceof Collection, 'Arrays added later should be also converted to collections' );
 	}
 
 	public function testCollectionHasMembersAccessibleByIndexes()

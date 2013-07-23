@@ -61,6 +61,9 @@ class Collection extends Object implements
 
 		'keys'			=> 'keys',
 		'values'		=> 'values',
+
+		'first'			=> 'first',
+		'last'			=> 'last',
 	];
 
 	/**
@@ -118,6 +121,26 @@ class Collection extends Object implements
 	protected function values()
 	{
 		return $this->___call_function_from_map( 'values', $this->data );
+	}
+
+	/**
+	 * Get the first item in the Collection
+	 *
+	 * @return		mixed		The first item in the Collection
+	 */
+	protected function first()
+	{
+		return reset( $this->data );
+	}
+
+	/**
+	 * Get the last item in the Collection
+	 *
+	 * @return		mixed		The last item in the Collection
+	 */
+	protected function last()
+	{
+		return end( $this->data );
 	}
 
 
@@ -208,26 +231,6 @@ class Collection extends Object implements
 		unset( $this->data[$key] );
 
 		return $this;
-	}
-
-	/**
-	 * Get the first item in the Collection
-	 *
-	 * @return		mixed		The first item in the Collection
-	 */
-	public function first()
-	{
-		return reset( $this->data );
-	}
-
-	/**
-	 * Get the last item in the Collection
-	 *
-	 * @return		mixed		The last item in the Collection
-	 */
-	public function last()
-	{
-		return end( $this->data );
 	}
 
 	/**

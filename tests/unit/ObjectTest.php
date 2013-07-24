@@ -88,3 +88,4 @@ class ObjectTest extends \Codeception\TestCase\Test
 		$this->assertTrue( $this->obj->responds_to( 'responds_to' ) );
 	}
 
+}

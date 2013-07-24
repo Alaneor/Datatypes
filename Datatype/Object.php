@@ -9,8 +9,10 @@ use Datatype\Traits\PropertyMapperTrait;
 /**
  * Object datatype
  *
- * @property-read		string		parent			The full namespaced name of the parent class or null if the class does not have a parent
- * @property-read		string		instance_of		The full namespaced name of the current class
+ * @property-read		string			parent			The full namespaced name of the parent class or null if the class does not have a parent
+ * @property-read		string			instance_of		The full namespaced name of the current class
+ * @property-read		Collection		implements		List of all interfaces this object or it's parents implement
+ * @property-read		Collection		uses			List of all traits this object uses ( does not include traits used by parent classes )
  */
 class Object
 {
@@ -20,7 +22,26 @@ class Object
 	private static $property_map = [
 		'parent'		=> '___parent',
 		'instance_of'	=> '___instance_of',
+		'implements'	=> '___implements',
+		'uses'			=> '___uses',
 	];
+
+
+	static public function class_implements( $interface = null )
+	{
+		$interface	= (string)$interface;
+		$implements	= new Collection( class_implements( get_called_class() ) );
+
+		return $interface ? $implements->contains( $interface ) : $implements;
+	}
+
+	static public function class_uses( $trait = null )
+	{
+		$trait	= (string)$trait;
+		$uses	= new Collection( class_uses( get_called_class() ) );
+
+		return $trait ? $uses->contains( $trait ) : $uses;
+	}
 
 
 	protected function ___parent()
@@ -33,6 +54,16 @@ class Object
 	protected function ___instance_of()
 	{
 		return get_class( $this );
+	}
+
+	protected function ___implements()
+	{
+		return static::class_implements();
+	}
+
+	protected function ___uses()
+	{
+		return static::class_uses();
 	}
 
 

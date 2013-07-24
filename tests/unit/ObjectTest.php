@@ -33,6 +33,20 @@ class ObjectTest extends \Codeception\TestCase\Test
 		$this->assertEquals( 'Datatype\Object', $this->obj->instance_of );
 	}
 
+	public function testStaticMethodClass_implementsBehaviour()
+	{
+		$this->assertContains( 'ArrayAccess', Collection::class_implements(), 'class_implements should return a Collection with all implemented interfaces' );
+		$this->assertEquals( true, Collection::class_implements( 'SeekableIterator' ) );
+		$this->assertEquals( false, Collection::class_implements( 'NonExistentInterface' ) );
+	}
+
+	public function testStaticMethodClass_usesBehaviour()
+	{
+		$this->assertContains( 'Datatype\Traits\PropertyMapperTrait', Collection::class_uses(), 'class_uses should return a Collection with all used traits in given class' );
+		$this->assertEquals( true, Collection::class_uses( 'Datatype\Traits\PropertyMapperTrait' ) );
+		$this->assertEquals( false, Collection::class_uses( 'NonExistentTrait' ) );
+	}
+
 	public function testInstance_ofMethodChecksOnlyCurrentClass()
 	{
 

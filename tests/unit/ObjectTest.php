@@ -82,4 +82,9 @@ class ObjectTest extends \Codeception\TestCase\Test
 		$this->assertTrue( $this->obj->equals( $dup ) );
 	}
 
-}
+	public function testResponds_toOnlyRespondsToPublicMethods()
+	{
+		$this->assertFalse( $this->obj->responds_to( '___parent' ) );
+		$this->assertTrue( $this->obj->responds_to( 'responds_to' ) );
+	}
+

@@ -80,6 +80,7 @@ class Collection extends Object implements
 		'values'	=>		[ 'array_values' ],
 		'map'		=>		[ 'array_map',			2 ],
 		'exists'	=>		[ 'array_key_exists',	2 ],
+		'contains'	=>		[ 'in_array',			2 ],
 	];
 
 

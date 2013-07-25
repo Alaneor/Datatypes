@@ -115,8 +115,6 @@ class Object
 	 * This method is different from {@link self::is_a()} method that
 	 * it does not take parents into consideration.
 	 *
-	 * @todo		Consider also magic public methods defined via FunctionMapperTrait
-	 *
 	 * @param		string|Object	A class name or instance of any object to compare against
 	 *
 	 * @return		bool			Returns true if this object is an instance of the given class
@@ -142,6 +140,8 @@ class Object
 	 * Check if the given method can be called on the current object
 	 *
 	 * This method only lists / checks against public methods.
+	 *
+	 * @todo		Consider also magic public methods defined via FunctionMapperTrait
 	 *
 	 * @param		string				The method that should be checked
 	 *

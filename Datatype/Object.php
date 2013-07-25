@@ -14,7 +14,7 @@ use Datatype\Traits\PropertyMapperTrait;
  * @property-read		Collection		implements		List of all interfaces this object or it's parents implement
  * @property-read		Collection		uses			List of all traits this object uses ( does not include traits used by parent classes )
  */
-class Object
+abstract class Object
 {
 	use PropertyMapperTrait;
 

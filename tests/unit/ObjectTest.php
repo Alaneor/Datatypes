@@ -1,7 +1,6 @@
 <?php
 
 use Codeception\Util\Stub;
-use Datatype\Object;
 use Datatype\Collection;
 
 
@@ -12,10 +11,10 @@ class ObjectTest extends \Codeception\TestCase\Test
 	 */
 	protected $codeGuy;
 
-
+	// Cannot test directly with Object as it is an abstract class, so let's use Collection
 	protected function _before()
 	{
-		$this->obj = new Object;
+		$this->obj = new Collection;
 		$this->col = new Collection( ['a', 'b', 'c', 2] );
 	}
 
@@ -30,7 +29,7 @@ class ObjectTest extends \Codeception\TestCase\Test
 
 	public function testInstance_ofPropertyHoldsClassName()
 	{
-		$this->assertEquals( 'Datatype\Object', $this->obj->instance_of );
+		$this->assertEquals( 'Datatype\Collection', $this->col->instance_of );
 	}
 
 	public function testStaticMethodClass_implementsBehaviour()
@@ -50,7 +49,7 @@ class ObjectTest extends \Codeception\TestCase\Test
 	public function testInstance_ofMethodChecksOnlyCurrentClass()
 	{
 
-		$this->assertTrue( $this->obj->instance_of( 'Datatype\Object' ) );
+		$this->assertTrue( $this->obj->instance_of( 'Datatype\Collection' ) );
 		$this->assertFalse( $this->col->instance_of( 'Datatype\Object' ) );
 	}
 
@@ -68,7 +67,7 @@ class ObjectTest extends \Codeception\TestCase\Test
 	public function testSame_asMethodShouldReturnTrueOnlyForReferencesToIdenticalObject()
 	{
 		$ref = $this->obj;
-		$new = new Object;
+		$new = new Collection;
 		$dup = clone $this->obj;
 
 		$this->assertTrue( $this->obj->same_as( $ref ) );
@@ -79,7 +78,7 @@ class ObjectTest extends \Codeception\TestCase\Test
 	public function testEqualsMethodShouldNotBeSoStrict()
 	{
 		$ref = $this->obj;
-		$new = new Object;
+		$new = new Collection;
 		$dup = clone $this->obj;
 
 		$this->assertTrue( $this->obj->equals( $ref ) );

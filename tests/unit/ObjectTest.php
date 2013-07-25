@@ -54,6 +54,11 @@ class ObjectTest extends \Codeception\TestCase\Test
 		$this->assertFalse( $this->col->instance_of( 'Datatype\Object' ) );
 	}
 
+	public function testInstance_ofAllowsAnInstaneAsInput()
+	{
+		$this->assertTrue( $this->col->instance_of( new Collection ), 'instance_of method must allow an object instance as input' );
+	}
+
 	public function testIsaMethodIncludesParentsInClassChecking()
 	{
 		$this->assertTrue( $this->col->is_a( 'Datatype\Collection' ) );

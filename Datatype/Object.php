@@ -123,7 +123,19 @@ class Object
 	 */
 	public function instance_of( $class )
 	{
-		return get_class( $this ) === (string)$class;
+		// Make sure we are dealing with a string during comparison
+		is_object( $class ) && $class = get_class( $class );
+		if ( ! is_string( $class ) )
+		{
+			$trace = debug_backtrace();
+			trigger_error(
+				'Trying to compare class name against non-string value' .
+				' in ' . $trace[0]['file'] .
+				' on line ' . $trace[0]['line'],
+				E_USER_WARNING );
+		}
+
+		return get_class( $this ) == $class;
 	}
 
 	/**

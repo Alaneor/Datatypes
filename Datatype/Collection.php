@@ -169,7 +169,7 @@ class Collection extends Object implements
 	{
 		$data = [];
 
-		foreach ( $this->data as $key => $value )
+		foreach ( $this->data as $key => &$value )
 		{
 			$data[$key] = $value instanceof static ? $value->to_a() : $value;
 		}

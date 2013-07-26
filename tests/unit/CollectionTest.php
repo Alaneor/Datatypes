@@ -20,6 +20,11 @@ class CollectionTest extends \Codeception\TestCase\Test
 	{
 	}
 
+	public function testCollectionShouldBeDefinedAsMutable()
+	{
+		$this->assertTrue( $this->collection->is_mutable, 'The Collection class must be defined as being mutable' );
+	}
+
 	public function testCollectionMimicksArrays()
 	{
 		$implements = class_implements( $this->collection );

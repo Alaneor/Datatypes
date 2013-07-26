@@ -9,6 +9,7 @@ use Datatype\Traits\PropertyMapperTrait;
 /**
  * Object datatype
  *
+ * @property-read		bool			is_mutable		Is this class mutable / can the class be modified after instantiation?
  * @property-read		string			parent			The full namespaced name of the parent class or null if the class does not have a parent
  * @property-read		string			instance_of		The full namespaced name of the current class
  * @property-read		Collection		implements		List of all interfaces this object or it's parents implement
@@ -20,6 +21,7 @@ abstract class Object
 
 
 	private static $property_map = [
+		'is_mutable'	=> '___is_mutable',
 		'parent'		=> '___parent',
 		'instance_of'	=> '___instance_of',
 		'implements'	=> '___implements',
@@ -43,6 +45,11 @@ abstract class Object
 		return $trait ? $uses->contains( $trait ) : $uses;
 	}
 
+
+	protected function ___is_mutable()
+	{
+		return ( $this->class_uses( 'Datatype\Traits\UnmutableClassTrait' ) ) ? false : true;
+	}
 
 	protected function ___parent()
 	{

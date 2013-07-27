@@ -28,11 +28,19 @@ abstract class Object
 		'uses'			=> '___uses',
 	];
 
+	// Cached values for dynamic class properties
+	static protected $___is_mutable		= [];
+	static protected $___implements		= [];
+	static protected $___uses			= [];
+
 
 	static public function class_implements( $interface = null )
 	{
 		$interface	= (string)$interface;
-		$implements	= new Collection( class_implements( get_called_class() ) );
+		$class		= get_called_class();
+
+		! isset( static::$___implements[$class] ) && static::$___implements[$class] = new UnmutableCollection( class_implements( $class ) );
+		$implements	= static::$___implements[$class];
 
 		return $interface ? $implements->contains( $interface ) : $implements;
 	}
@@ -40,7 +48,10 @@ abstract class Object
 	static public function class_uses( $trait = null )
 	{
 		$trait	= (string)$trait;
-		$uses	= new Collection( class_uses( get_called_class() ) );
+		$class	= get_called_class();
+
+		! isset( static::$___uses[$class] ) && static::$___uses[$class] = new UnmutableCollection( class_uses( $class ) );
+		$uses	= static::$___uses[$class];
 
 		return $trait ? $uses->contains( $trait ) : $uses;
 	}

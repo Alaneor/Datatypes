@@ -56,7 +56,7 @@ class Collection extends Object implements
 	 *
 	 * @var		array
 	 */
-	private static $property_map = [
+	static private $property_map = [
 		'length'		=> 'count',
 		'size'			=> 'count',
 		'count'			=> 'count',
@@ -73,7 +73,7 @@ class Collection extends Object implements
 	 *
 	 * @var		array
 	 */
-	private static $function_map = [
+	static private $function_map = [
 	//	Called method:		Maps to:				$data position:			Args default values:
 		'unique'	=>		[ 'array_unique' ],
 		'keys'		=>		[ 'array_keys' ],

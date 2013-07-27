@@ -48,7 +48,8 @@ abstract class Object
 
 	protected function ___is_mutable()
 	{
-		return ( $this->class_uses( 'Datatype\Traits\UnmutableClassTrait' ) ) ? false : true;
+		// A class is considered to be mutable when it does not use UnmutableClassTrait
+		return ! $this->class_uses( 'Datatype\Traits\UnmutableClassTrait' );
 	}
 
 	protected function ___parent()

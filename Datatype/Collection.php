@@ -9,13 +9,13 @@ use Datatype\Traits\FunctionMapperTrait;
 /**
  * Collection datatype
  *
- * @property-read		integer			count		Number of elements in Collection
- * @property-read		integer			length		Alias for count
- * @property-read		integer			size		Alias for count
- * @property-read		Collection		keys		All keys in the current Collection
- * @property-read		Collection		values		All values in the current Collection
- * @property-read		mixed			first		The first item in the Collection
- * @property-read		mixed			last		The last item in the Collection
+ * @property-read		integer		count		Number of elements in Collection
+ * @property-read		integer		length		Alias for count
+ * @property-read		integer		size		Alias for count
+ * @property-read		self		keys		All keys in the current Collection
+ * @property-read		self		values		All values in the current Collection
+ * @property-read		mixed		first		The first item in the Collection
+ * @property-read		mixed		last		The last item in the Collection
  */
 class Collection extends Object implements
 	\ArrayAccess,

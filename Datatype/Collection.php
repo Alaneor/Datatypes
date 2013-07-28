@@ -214,9 +214,6 @@ class Collection extends Object implements
 	/**
 	 * Add one element to the end of the Collection
 	 *
-	 * You should use the standard array notation '[]' to add
-	 * items to the Collection for better performace.
-	 *
 	 * @param		mixed		The data to be added to the Collection
 	 */
 	public function add( $value )

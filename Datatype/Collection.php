@@ -79,8 +79,16 @@ class Collection extends Object implements
 		'keys'		=>		[ 'array_keys' ],
 		'values'	=>		[ 'array_values' ],
 		'map'		=>		[ 'array_map',			2 ],
+		'has'		=>		[ 'array_key_exists',	2 ],
 		'exists'	=>		[ 'array_key_exists',	2 ],
 		'contains'	=>		[ 'in_array',			2 ],
+		'filter'	=>		[ 'array_filter' ],
+		'flip'		=>		[ 'array_flip' ],
+		'replace'	=>		[ 'array_replace' ],
+		'reverse'	=>		[ 'array_reverse' ],
+		'search'	=>		[ 'array_search',		2 ],
+		'slice'		=>		[ 'array_slice' ],
+		'sum'		=>		[ 'array_sum' ],
 	];
 
 

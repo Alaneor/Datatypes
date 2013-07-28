@@ -11,7 +11,7 @@ baseUrl			:
 accessLevels	: [public]
 autocomplete	: [classes, methods, constants, classconstants, functions]
 php				: Yes
-todo			: yes # Consider turning this off when publishing the docs
+todo			: Yes
 templateConfig	: docs/templates/bootstrap/config.neon
 
 quiet			: No

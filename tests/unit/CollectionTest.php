@@ -160,4 +160,16 @@ class CollectionTest extends \Codeception\TestCase\Test
 
 		$this->assertEquals( $this->collection, unserialize( $ser ) );
 	}
+
+	public function testTheEachMethodShouldModifyOriginalValues()
+	{
+		$col = new Collection( [1,2,3] );
+
+		$col->each( function( $key, &$value )
+		{
+			$value++;
+		});
+
+		$this->assertEquals([2,3,4], $col->to_a() );
+	}
 }

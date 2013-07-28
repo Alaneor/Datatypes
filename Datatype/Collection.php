@@ -271,6 +271,56 @@ class Collection extends Object implements
 		return $this;
 	}
 
+	/**
+	 * Apply a callback to each element in the Collection
+	 *
+	 * The callback will receive two parameters: The current key and a reference to
+	 * the current value in the Collection.
+	 *
+	 * <p class='alert alert-danger'>You cannot modify $key - it is provided to you in the callback
+	 * only for your reference should you need it.<br>
+	 * *( You CAN change the variable, but this will not be
+	 * reflected in the Collection )*</p>
+	 * <br>
+	 * <p class='alert alert-danger'>The $value is passed to your callback as a reference to the actual value
+	 * in the Collection - in order to actually modify the value, you must declare your callback's $value
+	 * parameter to accept references - you do this by prefixing the $value with '&' ( ampersand ). See
+	 * example code below.</p>
+	 *
+	 * <h3>Example:</h3>
+	 * <code>
+	 * $col = new Datatype\Collection( [1,2,3] );
+	 * $col->each( function( $key, &$value )	// Notice the ampersand before $value
+	 * {
+	 * 	$value++;
+	 * });
+	 * print_r( $col->to_a() );		// [2,3,4]
+	 * </code>
+	 *
+	 * @param		callable		The callback to be applied to each element in the Collection
+	 * @param		\Object			An optional instance of an object that should be available via $this inside the callback
+	 *
+	 * @return		self
+	 */
+	public function each( $callback, $newthis = null )
+	{
+		if ( ! is_callable( $callback ) )
+		{
+			$trace = debug_backtrace();
+			trigger_error(
+				'Invalid callback provided' .
+				' in ' . $trace[0]['file'] .
+				' on line ' . $trace[0]['line'],
+				E_USER_ERROR );
+		}
+
+		$newthis && $callback instanceof \Closure && $callback->bindTo( $newthis );
+
+		foreach ( $this->data as $key => &$value ) $callback( $key, $value );
+
+		return $this;
+	}
+
 
 	protected function ___process_return_value( $function, $value )
 	{

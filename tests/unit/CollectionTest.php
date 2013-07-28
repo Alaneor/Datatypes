@@ -134,11 +134,11 @@ class CollectionTest extends \Codeception\TestCase\Test
 		}
 	}
 
-	public function testICanCallArbitraryArrayFunctionAsMethod()
+	public function testICanCallDefinedArrayFunctionAsMethod()
 	{
 		$testArray = new Collection( ['a' => 'b', 'c' => ['d' => 'nested'], 0 => 'e'] );
 
-		$this->assertEquals( $testArray, $this->collection->unique( SORT_REGULAR ), 'This function requires the array to be passed as copy' );
+		$this->assertEquals( $testArray, $this->collection->unique( SORT_REGULAR ) );
 		$this->assertEquals( $testArray->to_a(), $this->collection->to_a(), 'The original object must not be modified by previous assertion' );
 	}
 

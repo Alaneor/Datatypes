@@ -2,10 +2,13 @@ language: php
 php:
   - 5.5
   - 5.4
+before_install:
+  - composer self-update				# Update Composer to latest version
+install:
+  - composer install					# Install dependencies
 before_script:
-  - "composer install"
-  - "vendor/bin/codecept build"
-script: "vendor/bin/codecept run unit"
+  - vendor/bin/codecept build			# Initialise Codeception test environment
+script: vendor/bin/codecept run unit	# Run tests!
 branches:
   only:
     - master

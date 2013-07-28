@@ -9,6 +9,21 @@ use Datatype\Traits\FunctionMapperTrait;
 /**
  * Collection datatype
  *
+ * @method		self		unique( int $sort_flags = SORT_STRING )	Get all unique elements of the Collection<br>{@link http://www.php.net/manual/en/function.array-unique.php PHP - array_unique}
+ * @method		self		keys()									Get all keys in the Collection<br>{@link http://www.php.net/manual/en/function.array-keys.php PHP - array_keys}
+ * @method		self		values()								Get all values in the Collection<br>{@link http://www.php.net/manual/en/function.array-values.php PHP - array_values}
+ * @method		self		map( callable $callback = "" )			Apply the callback to all elements in the Collection and return the result as new Collection<br>{@link http://www.php.net/manual/en/function.array-map.php PHP - array_map}
+ * @method		bool		has( mixed $key = null )				Check whether the given key is set in the Collection<br>{@link http://www.php.net/manual/en/function.array-key-exists.php PHP - array_key_exists}
+ * @method		bool		exists( mixed $key = null )				Alias for the 'has' method
+ * @method		bool		contains( mixed $value = null )			Check whether the given value exists in the Collection<br>{@link http://www.php.net/manual/en/function.in-array.php PHP - in_array}
+ * @method		self		filter( callable $callback = "" )		{@link http://www.php.net/manual/en/function.array-filter.php PHP - array_filter}
+ * @method		self		flip()									Get a new Collection where keys in current Collection are values and values are keys<br>{@link http://www.php.net/manual/en/function.array-flip.php PHP - array_flip}
+ * @method		self		replace( array $array1, ... )			{@link http://www.php.net/manual/en/function.array-replace.php PHP - array_replace}
+ * @method		self		reverse( bool $preserve_keys = false )	Get a mew Collection with elements in reverse order<br>{@link http://www.php.net/manual/en/function.array-reverse.php PHP - array_reverse}
+ * @method		self		search( mixed $needle, bool $strict = false )	Search the Collection for a given value and return the corresponding key if successful<br>{@link http://www.php.net/manual/en/function.array-search.php PHP - array_search}
+ * @method		self		slice( int $offset, int $length = null, bool $preserve_keys = false )	{@link http://www.php.net/manual/en/function.array-slice.php PHP - array_slice}
+ * @method		int			sum()									Calculate the sum of values in the Collection<br>{@link http://www.php.net/manual/en/function.array-sum.php PHP - array_sum}
+ *
  * @property-read		integer		count		Number of elements in Collection
  * @property-read		integer		length		Alias for count
  * @property-read		integer		size		Alias for count
